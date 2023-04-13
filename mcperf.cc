@@ -166,7 +166,7 @@ bool poll_recv(zmq::socket_t& socket, zmq::message_t& msg) {
 		}
 #else
 		while (1) {
-			if (socket.recv(msg, recv_noblock_flag)) {
+			if (socket.recv(&msg, recv_noblock_flag)) {
 				return true;
 			}
 		}
@@ -192,7 +192,7 @@ bool poll_recv(zmq::socket_t& socket, zmq::message_t& msg) {
 		if (recv_result.has_value())
 			return true;
 #else
-		status = socket.recv(msg, recv_noblock_flag);
+		status = socket.recv(&msg, recv_noblock_flag);
 		if (status)
 			return status;
 #endif
